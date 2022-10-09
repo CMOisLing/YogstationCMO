@@ -2140,3 +2140,7 @@
 	. = ..()
 	REMOVE_TRAIT(L, TRAIT_REDUCED_DAMAGE_SLOWDOWN, type)
 
+/datum/reagent/blood/nanite_blood
+	name = "Grey Blood"
+	color = "#C80000"
+	taste_description = "Nano Machines"

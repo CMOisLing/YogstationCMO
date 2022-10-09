@@ -2,8 +2,8 @@
 	dupe_mode = COMPONENT_DUPE_UNIQUE_PASSARGS
 
 	var/mob/living/host_mob
-	var/nanite_volume = 100		//amount of nanites in the system, used as fuel for nanite programs
-	var/max_nanites = 100		//maximum amount of nanites in the system
+	var/nanite_volume = 50		//amount of nanites in the system, used as fuel for nanite programs
+	var/max_nanites = 50		//maximum amount of nanites in the system
 	var/regen_rate = 0.5		//nanites generated per second
 	var/safety_threshold = 0	//how low nanites will get before they stop processing/triggering
 	var/cloud_id = 0 			//0 if not connected to the cloud, 1-100 to set a determined cloud backup to draw from
@@ -12,6 +12,7 @@
 	var/max_programs = NANITE_PROGRAM_LIMIT
 
 	var/stealth = FALSE //if TRUE, does not appear on HUDs and health scans, and does not display the program list on nanite scans
+	var/optimal_environment = FALSE
 
 /datum/component/nanites/Initialize(amount = 100, cloud = 0)
 	if(!isliving(parent) && !istype(parent, /datum/nanite_cloud_backup))
@@ -32,8 +33,20 @@
 
 		if(cloud_id)
 			cloud_sync()
+		var/mob/living/carbon/human/H = host_mob
+		if(H.nanite_compatable)
+			max_nanites = 200
+
 /datum/component/nanites/proc/delete_nanites()
 	qdel(src)
+
+/datum/component/nanites/proc/update_nanites()
+	var/mob/living/carbon/human/H = host_mob
+	if(H.nanite_compatable)
+		optimal_environment = TRUE
+	else
+		optimal_environment = FALSE
+	
 
 /datum/component/nanites/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_HAS_NANITES, .proc/confirm_nanites)
@@ -100,6 +113,9 @@
 		adjust_nanites(null, arguments[1]) //just add to the nanite volume
 
 /datum/component/nanites/process()
+	var/mob/living/carbon/human/H = host_mob
+	if(H.nanite_compatable)
+		adjust_nanites(null, regen_rate)
 	adjust_nanites(null, regen_rate)
 	add_research()
 	for(var/X in programs)
@@ -175,7 +191,6 @@
 	holder.icon_state = "nanites[nanite_percent]"
 
 /datum/component/nanites/proc/on_emp(datum/source, severity)
-	nanite_volume *= (rand(0.60, 0.90))		//Lose 10-40% of nanites
 	adjust_nanites(null, -(rand(5, 50)))		//Lose 5-50 flat nanite volume
 	if(prob(40/severity))
 		cloud_id = 0
@@ -184,7 +199,6 @@
 		NP.on_emp(severity)
 
 /datum/component/nanites/proc/on_shock(datum/source, shock_damage)
-	nanite_volume *= (rand(0.45, 0.80))		//Lose 20-55% of nanites
 	adjust_nanites(null, -(rand(5, 50)))			//Lose 5-50 flat nanite volume
 	for(var/X in programs)
 		var/datum/nanite_program/NP = X
