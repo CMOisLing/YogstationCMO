@@ -208,3 +208,11 @@
 	if(close_machine(target))
 		log_combat(user, target, "inserted", null, "into [src].")
 	add_fingerprint(user)
+
+/obj/machinery/nanite_chamber/proc/augment_host()
+	if(iscarbon(occupant))
+		var/datum/species/species = occupant.dna.species
+		species.exotic_blood = /datum/reagent/nanite_blood
+		species.nanite_compatable = TRUE
+	else
+		return
