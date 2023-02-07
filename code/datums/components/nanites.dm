@@ -252,8 +252,11 @@
 /datum/component/nanites/proc/confirm_nanites()
 	return TRUE //yup i exist
 
-/datum/component/nanites/proc/add_bonus(datum/source, program) //todo
+/datum/component/nanites/proc/add_bonus(datum/source, bonus)
+	bonuses.add(bonus)
 
+/datum/component/nanites/proc/remove_bonus(datum/source, bonus)
+	bonuses.remove(bonus)
 
 /datum/component/nanites/proc/get_data(list/nanite_data)
 	nanite_data["nanite_volume"] = nanite_volume

@@ -96,6 +96,8 @@
 	maxHealth = 1.1 * STANDARD_ORGAN_THRESHOLD
 	toxTolerance = 3.3
 	toxLethality = 0.009
+	var/nanite_volume_boost = 25
+	var/nanite_bonus = ""
 
 /obj/item/organ/liver/cybernetic/upgraded
 	name = "upgraded cybernetic liver"
@@ -106,6 +108,8 @@
 	healing_factor = 2 * STANDARD_ORGAN_HEALING //Can regenerate from damage quicker
 	toxTolerance = 20
 	toxLethality = 0.007
+	nanite_volume_boost = 50
+	nanite_bonus = "cyber_liver"
 
 /obj/item/organ/liver/cybernetic/upgraded/on_life()
 	. = ..()
@@ -122,6 +126,16 @@
 			damage+=100
 		if(2)
 			damage+=50
+
+/obj/item/organ/liver/cybernetic/Insert(mob/living/carbon/M, special = 0, drop_if_replaced = TRUE,special_zone = null)
+	if(SEND_SIGNAL(M, COMSIG_HAS_NANITES))
+		SEND_SIGNAL(M, COMSIG_NANITE_ADJUST_MAX_VOLUME, nanite_volume_boost)
+		SEND_SIGNAL(M, COMSIG_NANITE_ADD_BONUS, nanite_bonus)
+
+/obj/item/organ/liver/cybernetic/Remove(mob/living/carbon/M, special = FALSE)
+	if(SEND_SIGNAL(M, COMSIG_HAS_NANITES))
+		SEND_SIGNAL(M, COMSIG_NANITE_ADJUST_MAX_VOLUME, -nanite_volume_boost)
+		SEND_SIGNAL(M, COMSIG_NANITE_REMOVE_BONUS, nanite_bonus)
 
 /obj/item/organ/liver/cybernetic/upgraded/ipc
 	name = "substance processor"

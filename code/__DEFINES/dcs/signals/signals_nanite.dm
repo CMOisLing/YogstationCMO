@@ -24,5 +24,5 @@
 	#define COMPONENT_PROGRAM_INSTALLED		1					//Installation successful
 	#define COMPONENT_PROGRAM_NOT_INSTALLED		2				//Installation failed, but there are still nanites
 #define COMSIG_NANITE_SYNC "nanite_sync"						//(datum/component/nanites, full_overwrite, copy_activation) Called to sync the target's nanites to a given nanite component
-#define COMSIG_NANITE_ADD_BONUS "nanite_add_bonus"				//fdgzfdgsfgdfdgs
+#define COMSIG_NANITE_ADD_BONUS "nanite_add_bonus"				//adds or removes a bonus from the nanites
 #define COMSIG_NANITE_REMOVE_BONUS "nanite_remove_bonus"
