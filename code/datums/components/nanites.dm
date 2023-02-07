@@ -2,10 +2,10 @@
 	dupe_mode = COMPONENT_DUPE_UNIQUE_PASSARGS
 
 	var/mob/living/host_mob
-	var/nanite_volume = 100		//amount of nanites in the system, used as fuel for nanite programs
-	var/max_nanites = 500		//maximum amount of nanites in the system
-	var/regen_rate = 0.5		//nanites generated per second
-	var/safety_threshold = 50	//how low nanites will get before they stop processing/triggering
+	var/nanite_volume = 50		//amount of nanites in the system, used as fuel for nanite programs
+	var/max_nanites = 50		//maximum amount of nanites in the system
+	var/regen_rate = 2		//nanites generated per second
+	var/safety_threshold = 0	//how low nanites will get before they stop processing/triggering
 	var/cloud_id = 0 			//0 if not connected to the cloud, 1-100 to set a determined cloud backup to draw from
 	var/next_sync = 0
 	var/list/datum/nanite_program/programs = list()
@@ -42,6 +42,7 @@
 	RegisterSignal(parent, COMSIG_NANITE_SET_VOLUME, .proc/set_volume)
 	RegisterSignal(parent, COMSIG_NANITE_ADJUST_VOLUME, .proc/adjust_nanites)
 	RegisterSignal(parent, COMSIG_NANITE_SET_MAX_VOLUME, .proc/set_max_volume)
+	RegisterSignal(parent, COMSIG_NANITE_ADJUST_MAX_VOLUME, .proc/adjust_max_volume)
 	RegisterSignal(parent, COMSIG_NANITE_SET_CLOUD, .proc/set_cloud)
 	RegisterSignal(parent, COMSIG_NANITE_SET_SAFETY, .proc/set_safety)
 	RegisterSignal(parent, COMSIG_NANITE_SET_REGEN, .proc/set_regen)
@@ -49,6 +50,8 @@
 	RegisterSignal(parent, COMSIG_NANITE_SCAN, .proc/nanite_scan)
 	RegisterSignal(parent, COMSIG_NANITE_SYNC, .proc/sync)
 	RegisterSignal(parent, COMSIG_NANITE_DELETE, .proc/delete_nanites)
+	RegisterSignal(parent, COMSIG_NANITE_ADD_BONUS, .proc/add_bonus)
+	RegisterSignal(parent, COMSIG_NANITE_REMOVE_BONUS, .proc/remove_bonus)
 
 	if(isliving(parent))
 		RegisterSignal(parent, COMSIG_ATOM_EMP_ACT, .proc/on_emp)
@@ -227,8 +230,11 @@
 /datum/component/nanites/proc/set_volume(datum/source, amount)
 	nanite_volume = clamp(amount, 0, max_nanites)
 
-/datum/component/nanites/proc/set_max_volume(datum/source, amount)
+/datum/component/nanites/proc/set_max_volume(datum/source, amount) //I think this is broken?
 	max_nanites = max(1, max_nanites)
+
+/datum/component/nanites/proc/adjust_max_volume(datum/source, amount)
+	max_nanites = max(1, max_nanites + amount)
 
 /datum/component/nanites/proc/set_cloud(datum/source, amount)
 	cloud_id = clamp(amount, 0, 100)
