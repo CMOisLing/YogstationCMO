@@ -378,8 +378,8 @@
 		var/armor_block = run_armor_check(affecting, MELEE)
 		apply_damage(damage, BRUTE, affecting, armor_block, wound_bonus=wound_mod)
 
-/mob/living/carbon/human/mech_melee_attack(obj/mecha/M)
-	if(M.selected?.melee_override)
+/mob/living/carbon/human/mech_melee_attack(obj/mecha/M, equip_allowed)
+	if(M.selected?.melee_override && equip_allowed)
 		M.selected.action(src)
 	else if(M.occupant.a_intent == INTENT_HARM)
 		M.do_attack_animation(src)
@@ -391,7 +391,7 @@
 			var/dmg = rand(M.force/2, M.force)
 			switch(M.damtype)
 				if(BRUTE)
-					if(M.force > 20)
+					if(M.force >= 20)
 						Knockdown(1.5 SECONDS)//the victim could get up before getting hit again
 						var/throwtarget = get_edge_target_turf(M, get_dir(M, get_step_away(src, M)))
 						src.throw_at(throwtarget, 5, 2, src)//one tile further than mushroom punch/psycho brawling

@@ -1,6 +1,8 @@
 /datum/job/hydro
 	title = "Botanist"
+	description = "Grow plants for the cook, for medicine, and for recreation."
 	flag = BOTANIST
+	orbit_icon = "seedling"
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
@@ -11,7 +13,7 @@
 
 	outfit = /datum/outfit/job/botanist
 
-	alt_titles = list("Ecologist", "Agriculturist", "Botany Greenhorn", "Hydroponicist")
+	alt_titles = list("Ecologist", "Agriculturist", "Botany Greenhorn", "Hydroponicist", "Gardener")
 
 	added_access = list(ACCESS_BAR, ACCESS_KITCHEN)
 	base_access = list(ACCESS_HYDROPONICS, ACCESS_MORGUE, ACCESS_MINERAL_STOREROOM)
@@ -19,6 +21,10 @@
 	paycheck_department = ACCOUNT_SRV
 	display_order = JOB_DISPLAY_ORDER_BOTANIST
 	minimal_character_age = 22 //Biological understanding of plants and how to manipulate their DNAs and produces relatively "safely". Not just something that comes to you without education
+
+	departments_list = list(
+		/datum/job_department/service,
+	)
 
 	mail_goodies = list(
 		/obj/item/reagent_containers/glass/bottle/mutagen = 20,
@@ -30,6 +36,8 @@
 	)
 
 	changed_maps = list("OmegaStation", "EclipseStation")
+
+	smells_like = "fertilizer"
 
 /datum/job/hydro/proc/OmegaStationChanges()
 	added_access = list()

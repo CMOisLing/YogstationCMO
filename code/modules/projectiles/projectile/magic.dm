@@ -245,10 +245,8 @@
 				if(chooseable_races.len)
 					new_mob.set_species(pick(chooseable_races))
 
-			var/datum/preferences/A = new()	//Randomize appearance for the human
-			A.copy_to(new_mob, icon_updates=0)
-
 			var/mob/living/carbon/human/H = new_mob
+			H.randomize_human_appearance(~(RANDOMIZE_SPECIES))
 			H.update_body()
 			H.update_hair()
 			H.update_body_parts()
@@ -740,7 +738,7 @@
 	. = ..()
 	if(iscarbon(target))
 		var/mob/living/carbon/X = target
-		X.fire_stacks += 2
+		X.adjust_fire_stacks(2)
 		X.IgniteMob()
 
 
@@ -851,7 +849,7 @@
 	. = ..()
 	if(iscarbon(target))
 		var/mob/living/carbon/X = target
-		X.fire_stacks += 1
+		X.adjust_fire_stacks(1)
 		X.IgniteMob()
 		X.adjustBruteLoss(5)
 
