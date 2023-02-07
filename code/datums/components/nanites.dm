@@ -9,6 +9,7 @@
 	var/cloud_id = 0 			//0 if not connected to the cloud, 1-100 to set a determined cloud backup to draw from
 	var/next_sync = 0
 	var/list/datum/nanite_program/programs = list()
+	var/list/datum/nanite_program/bonuses = list()
 	var/max_programs = NANITE_PROGRAM_LIMIT
 
 	var/stealth = FALSE //if TRUE, does not appear on HUDs and health scans, and does not display the program list on nanite scans
@@ -247,6 +248,9 @@
 
 /datum/component/nanites/proc/confirm_nanites()
 	return TRUE //yup i exist
+
+/datum/component/nanites/proc/add_bonus(datum/source, program) //todo
+
 
 /datum/component/nanites/proc/get_data(list/nanite_data)
 	nanite_data["nanite_volume"] = nanite_volume
