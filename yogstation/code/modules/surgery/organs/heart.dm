@@ -5,7 +5,7 @@
 	organ_flags = ORGAN_SYNTHETIC
 	var/nanite_regen_boost = 3
 	var/nanite_volume_boost = 200
-	var/nanite_bonus = "nanite_heart"
+	var/list/nanite_bonus = list("cyber_heart", "upgraded_cyber_heart", "nanite_heart")
 
 /obj/item/organ/heart/nanite/Insert(mob/living/carbon/M, special = 0, drop_if_replaced = TRUE,special_zone = null)
 	if(SEND_SIGNAL(M, COMSIG_HAS_NANITES))

@@ -253,10 +253,10 @@
 	return TRUE //yup i exist
 
 /datum/component/nanites/proc/add_bonus(datum/source, bonus)
-	bonuses.add(bonus)
+	bonuses.Add(bonus)
 
 /datum/component/nanites/proc/remove_bonus(datum/source, bonus)
-	bonuses.remove(bonus)
+	bonuses.Remove(bonus)
 
 /datum/component/nanites/proc/get_data(list/nanite_data)
 	nanite_data["nanite_volume"] = nanite_volume

@@ -97,7 +97,7 @@
 	toxTolerance = 3.3
 	toxLethality = 0.009
 	var/nanite_volume_boost = 25
-	var/nanite_bonus = ""
+	var/list/nanite_bonus = list("cyber_liver")
 
 /obj/item/organ/liver/cybernetic/upgraded
 	name = "upgraded cybernetic liver"
@@ -109,7 +109,7 @@
 	toxTolerance = 20
 	toxLethality = 0.007
 	nanite_volume_boost = 50
-	nanite_bonus = "cyber_liver"
+	nanite_bonus = list("cyber_liver", "upgraded_cyber_liver")
 
 /obj/item/organ/liver/cybernetic/upgraded/on_life()
 	. = ..()

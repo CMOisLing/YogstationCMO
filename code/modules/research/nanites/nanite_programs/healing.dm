@@ -1,6 +1,6 @@
 //Programs that heal the host in some way.
 
-/datum/nanite_program/regenerative
+/datum/nanite_program/regenerative //choping block
 	name = "Accelerated Regeneration"
 	desc = "The nanites boost the host's natural regeneration, increasing their healing speed. Does not consume nanites if the host is unharmed."
 	use_rate = 2.5
@@ -33,7 +33,7 @@
 		host_mob.adjustBruteLoss(-1, TRUE)
 		host_mob.adjustFireLoss(-1, TRUE)
 
-/datum/nanite_program/temperature
+/datum/nanite_program/temperature //chopping block
 	name = "Temperature Adjustment"
 	desc = "The nanites adjust the host's internal temperature to an ideal level."
 	use_rate = 3.5
@@ -51,21 +51,16 @@
 		host_mob.adjust_bodytemperature(40 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, BODYTEMP_NORMAL)
 
 /datum/nanite_program/purging
-	name = "Blood Purification"
-	desc = "The nanites purge toxins and chemicals from the host's bloodstream."
-	use_rate = 1
+	name = "Toxin Neutralization"
+	desc = "The nanites neutralize toxin in the host"
+	use_rate = 2
+	var/toxin_healing = 1
 	rogue_types = list(/datum/nanite_program/suffocating, /datum/nanite_program/necrotic)
 
-/datum/nanite_program/purging/check_conditions()
-	var/foreign_reagent = LAZYLEN(host_mob.reagents?.reagent_list)
-	if(!host_mob.getToxLoss() && !foreign_reagent)
-		return FALSE
-	return ..()
-
 /datum/nanite_program/purging/active_effect()
-	host_mob.adjustToxLoss(-1)
-	for(var/datum/reagent/R in host_mob.reagents?.reagent_list)
-		host_mob.reagents.remove_reagent(R.type,1)
+	if(nanites.bonuses.Find("upgraded_cyber_liver"))
+		toxin_healing = 2
+	host_mob.adjustToxLoss(-toxin_healing)
 
 /datum/nanite_program/brain_heal
 	name = "Neural Regeneration"
@@ -140,7 +135,7 @@
 		host_mob.adjustBruteLoss(-1, TRUE)
 		host_mob.adjustFireLoss(-1, TRUE)
 
-/datum/nanite_program/purging_advanced
+/datum/nanite_program/purging_advanced //choping block
 	name = "Selective Blood Purification"
 	desc = "The nanites purge toxins and dangerous chemicals from the host's bloodstream, while ignoring beneficial chemicals. \
 			The added processing power required to analyze the chemicals severely increases the nanite consumption rate."

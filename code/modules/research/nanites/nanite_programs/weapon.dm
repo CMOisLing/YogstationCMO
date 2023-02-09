@@ -46,18 +46,6 @@
 			return
 		target.software_error()
 
-/datum/nanite_program/aggressive_replication
-	name = "Aggressive Replication"
-	desc = "Nanites will consume organic matter to improve their replication rate, damaging the host. The efficiency increases with the volume of nanites, requiring 200 to break even."
-	use_rate = 1
-	rogue_types = list(/datum/nanite_program/necrotic)
-	harmful = TRUE
-
-/datum/nanite_program/aggressive_replication/active_effect()
-	var/extra_regen = round(nanites.nanite_volume / 200, 0.1)
-	nanites.adjust_nanites(null,extra_regen)
-	host_mob.adjustBruteLoss(extra_regen / 2, TRUE)
-
 /datum/nanite_program/meltdown
 	name = "Meltdown"
 	desc = "Causes an internal meltdown inside the nanites, causing internal burns inside the host as well as rapidly destroying the nanite population.\
