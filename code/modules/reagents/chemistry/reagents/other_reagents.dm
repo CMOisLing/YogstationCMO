@@ -102,6 +102,8 @@
 	taste_description = "slime"
 
 /datum/reagent/vaccine/reaction_mob(mob/living/L, method=TOUCH, reac_volume)
+	if(iscarbon(L))
+		L.adjustOrganLoss(ORGAN_SLOT_BRAIN, 60, 60)
 	if(islist(data) && (method == INGEST || method == INJECT))
 		for(var/thing in L.diseases)
 			var/datum/disease/D = thing
