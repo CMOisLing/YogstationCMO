@@ -3211,6 +3211,7 @@
 #include "code\modules\research\nanites\public_chamber.dm"
 #include "code\modules\research\nanites\nanite_programs\buffing.dm"
 #include "code\modules\research\nanites\nanite_programs\healing.dm"
+#include "code\modules\research\nanites\nanite_programs\regeneration.dm"
 #include "code\modules\research\nanites\nanite_programs\rogue.dm"
 #include "code\modules\research\nanites\nanite_programs\sensor.dm"
 #include "code\modules\research\nanites\nanite_programs\suppression.dm"
