@@ -65,15 +65,15 @@
 /datum/nanite_program/mitochondria_replication/active_effect()
 	if(iscarbon(host_mob))
 		var/mob/living/carbon/C = host_mob
-	if(nanites.bonuses.Find("upgraded_cyber_heart"))
-		max_stam_damage = 40
-	if(C.getStaminaLoss() < max_stam_damage)
-		C.adjustStaminaLoss(5)
-	if(prob(5))
-		if(max_stam_damage < 80)
-			to_chat(C, "<span class='warning'>You feel weak!")
-		else
-			to_chat(C, "<span class='warning'>You feel terribly weak!")
+		if(nanites.bonuses.Find("upgraded_cyber_heart"))
+			max_stam_damage = 40
+		if(C.getStaminaLoss() < max_stam_damage)
+			C.adjustStaminaLoss(5)
+		if(prob(5))
+			if(max_stam_damage < 80)
+				to_chat(C, "<span class='warning'>You feel weak!")
+			else
+				to_chat(C, "<span class='warning'>You feel terribly weak!")
 
 /datum/nanite_program/endothermic_replication
 	name = "Endothermic Replication"
@@ -85,8 +85,9 @@
 
 /datum/nanite_program/mitochondria_replication/active_effect()
 	if(host_mob.bodytemperature >= min_temp)
-		var/regen = host_mob.bodytemperature() / BODYTEMP_NORMAL
+		var/regen = host_mob.bodytemperature / BODYTEMP_NORMAL
 		host_mob.adjust_bodytemperature(-temp_decrease) //might need to increase this later
+		SEND_SIGNAL(host_mob, COMSIG_NANITE_ADJUST_VOLUME, regen)
 		if(prob(5))
 			to_chat(host_mob, span_notice("Your feel cold inside."))
 
