@@ -53,18 +53,18 @@
 	rogue_types = list(/datum/nanite_program/toxic)
 
 /datum/nanite_program/toxic_replication/active_effect()
-	host_mob.adjustToxloss(0.5)
+	host_mob.adjustToxLoss(0.5)
 
 /datum/nanite_program/mitochondria_replication
 	name = "Mitochondria Hijack"
 	desc = "Nanites utilize the hosts mitochondira to replicate, this causes a large amount of fatigue for the host."
 	use_rate = -2
-	var/max_stam_damage = 80
 	rogue_types = list(/datum/nanite_program/toxic)
 
 /datum/nanite_program/mitochondria_replication/active_effect()
 	if(iscarbon(host_mob))
 		var/mob/living/carbon/C = host_mob
+		var/max_stam_damage = 80
 		if(nanites.bonuses.Find("upgraded_cyber_heart"))
 			max_stam_damage = 40
 		if(C.getStaminaLoss() < max_stam_damage)
@@ -79,15 +79,12 @@
 	name = "Endothermic Replication"
 	desc = "Nanites replicate using a process that benefits from high temperatures, this process is endothermic and will cool the user down."
 	use_rate = 1
-	var/min_temp = BODYTEMP_HEAT_DAMAGE_LIMIT
-	var/temp_decrease = 20
 	rogue_types = list(/datum/nanite_program/toxic)
 
 /datum/nanite_program/mitochondria_replication/active_effect()
-	if(host_mob.bodytemperature >= min_temp)
+	if(host_mob.bodytemperature >= BODYTEMP_HEAT_DAMAGE_LIMIT)
 		var/regen = host_mob.bodytemperature / BODYTEMP_NORMAL
-		host_mob.adjust_bodytemperature(-temp_decrease) //might need to increase this later
+		host_mob.adjust_bodytemperature(-20) //might need to increase this later
 		SEND_SIGNAL(host_mob, COMSIG_NANITE_ADJUST_VOLUME, regen)
 		if(prob(5))
 			to_chat(host_mob, span_notice("Your feel cold inside."))
-

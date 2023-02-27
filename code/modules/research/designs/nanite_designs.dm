@@ -496,3 +496,13 @@
 	id = "sensor_race_nanites"
 	program_type = /datum/nanite_program/sensor/race
 	category = list("Sensor Nanites")
+
+
+//////////////////////// Regen Nanites ///////////////////////////////////
+
+/datum/design/nanites/toxic_replication
+	name = "Toxic Replication"
+	desc = "Nanites use a quicker replication cycle inside the host. However, this cycle gives off toxic byproducts that damage the host."
+	id = "nanite_toxic_replication"
+	program_type = /datum/nanite_program/toxic_replication
+	category = list("Utility Nanites")
