@@ -506,3 +506,24 @@
 	id = "nanite_toxic_replication"
 	program_type = /datum/nanite_program/toxic_replication
 	category = list("Utility Nanites")
+
+/datum/design/nanites/mitochondria_replication
+	name = "Mitochondria Hijack"
+	desc = "Nanites use a the bodies mitochondria as the powerhouse of their replication, causes high levels of fatiuge in the host."
+	id = "nanite_mitochondria_replication"
+	program_type = /datum/nanite_program/mitochondria_replication
+	category = list("Utility Nanites")
+
+	/datum/design/nanites/endothermic_replication
+	name = "Endothermic Replication"
+	desc = "Nanites replicate using a process that benefits from high temperatures, this process is endothermic and will cool the user down."
+	id = "nanite_endothermic_replication"
+	program_type = /datum/nanite_program/endothermic_replication
+	category = list("Utility Nanites")
+
+	/datum/design/nanites/solar_replication
+	name = "Photochemical Replication"
+	desc = "Nanites boost replication by turning the hosts skin into a solar collecter, using the energy gathered to fuel replication, this however weakens the hosts skin, and makes them vulnerable to lasers."
+	id = "nanite_solar_replication"
+	program_type = /datum/nanite_program/solar_replication
+	category = list("Utility Nanites")

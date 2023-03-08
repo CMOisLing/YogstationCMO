@@ -88,3 +88,33 @@
 		SEND_SIGNAL(host_mob, COMSIG_NANITE_ADJUST_VOLUME, regen)
 		if(prob(5))
 			to_chat(host_mob, span_notice("Your feel cold inside."))
+
+/datum/nanite_program/solar_replication
+	name = "Photochemical Replication"
+	desc = "Nanites boost replication by turning the hosts skin into a solar collecter, using the energy gathered to fuel replication, this however weakens the hosts skin, and makes them vulnerable to lasers."
+	use_rate = 0
+	rogue_types = list(/datum/nanite_program/toxic)
+
+/datum/nanite_program/solar_replication/enable_passive_effect()
+	. = ..()
+	if(ishuman(host_mob))
+		var/mob/living/carbon/human/H = host_mob
+		H.physiology.armor.laser -= 20
+		H.physiology.burn_mod *= 0.9
+		H.physiology.brute_mod *= 0.9
+
+/datum/nanite_program/solar_replication/disable_passive_effect()
+	. = ..()
+	if(ishuman(host_mob))
+		var/mob/living/carbon/human/H = host_mob
+		H.physiology.armor.laser += 20
+		H.physiology.burn_mod /= 0.9
+		H.physiology.brute_mod /= 0.9
+
+/datum/nanite_program/solar_replication/active_effect()
+	var/light_amount = 0
+	var/mob/living/carbon/C = host_mob
+	if(isturf(C.loc))
+		var/turf/T = C.loc
+		light_amount = min(3, T.get_lumcount()) //Yolo
+		SEND_SIGNAL(host_mob, COMSIG_NANITE_ADJUST_VOLUME, light_amount)
