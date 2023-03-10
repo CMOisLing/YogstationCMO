@@ -62,7 +62,7 @@
 	rogue_types = list(/datum/nanite_program/toxic)
 
 /datum/nanite_program/mitochondria_replication/active_effect()
-	if(iscarbon(host_mob))
+	if(iscarbon(host_mob) && !isdead(host_mob)) //No free nanites when your dead
 		var/mob/living/carbon/C = host_mob
 		var/max_stam_damage = 80
 		if(nanites.bonuses.Find("upgraded_cyber_heart"))
