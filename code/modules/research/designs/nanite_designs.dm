@@ -493,14 +493,14 @@
 	program_type = /datum/nanite_program/mitochondria_replication
 	category = list("Utility Nanites")
 
-	/datum/design/nanites/endothermic_replication
+/datum/design/nanites/endothermic_replication
 	name = "Endothermic Replication"
 	desc = "Nanites replicate using a process that benefits from high temperatures, this process is endothermic and will cool the user down."
 	id = "nanite_endothermic_replication"
 	program_type = /datum/nanite_program/endothermic_replication
 	category = list("Utility Nanites")
 
-	/datum/design/nanites/solar_replication
+/datum/design/nanites/solar_replication
 	name = "Photochemical Replication"
 	desc = "Nanites boost replication by turning the hosts skin into a solar collecter, using the energy gathered to fuel replication, this however weakens the hosts skin, and makes them vulnerable to lasers."
 	id = "nanite_solar_replication"
