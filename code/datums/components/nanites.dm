@@ -175,6 +175,12 @@
 	if(nanite_volume <= 0) //oops we ran out
 		qdel(src)
 
+/datum/component/nanites/proc/consumption_count()
+
+/datum/component/nanites/proc/regen_count()
+
+/datum/component/nanites/proc/update_counter()
+
 /datum/component/nanites/proc/set_nanite_bar(remove = FALSE)
 	var/image/holder = host_mob.hud_list[DIAG_NANITE_FULL_HUD]
 	var/icon/I = icon(host_mob.icon, host_mob.icon_state, host_mob.dir)

@@ -81,7 +81,7 @@
 	use_rate = 1
 	rogue_types = list(/datum/nanite_program/toxic)
 
-/datum/nanite_program/mitochondria_replication/active_effect()
+/datum/nanite_program/endothermic_replication/active_effect()
 	if(host_mob.bodytemperature >= BODYTEMP_HEAT_DAMAGE_LIMIT)
 		var/regen = host_mob.bodytemperature / BODYTEMP_NORMAL
 		host_mob.adjust_bodytemperature(-20) //might need to increase this later

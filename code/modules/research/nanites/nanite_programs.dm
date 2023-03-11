@@ -154,6 +154,7 @@
 		else if(timer_type == NANITE_TIMER_RESET)
 			timer_counter = 0
 	if(check_conditions() && consume_nanites(use_rate))
+	// here
 		if(!passive_enabled)
 			enable_passive_effect()
 		active_effect()
