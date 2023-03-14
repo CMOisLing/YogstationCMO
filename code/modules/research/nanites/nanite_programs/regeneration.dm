@@ -134,3 +134,6 @@
 		return FALSE
 	var/mob/living/carbon/C = host_mob
 	if(host_mob.reagents.has_reagent(/datum/))
+
+
+// -------------------------- mood based regen - emotional something something
