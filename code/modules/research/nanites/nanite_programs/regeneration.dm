@@ -128,7 +128,7 @@
 	use_rate = 0
 	rogue_types = list(/datum/nanite_program/toxic)
 
-/datum/nanite_program/combustion_replication/check_conditions() // finish later
+/datum/nanite_program/combustion_replication/check_conditions() // finish later - bonus from lungs
 	. = ..()
 	if(!iscarbon())
 		return FALSE
