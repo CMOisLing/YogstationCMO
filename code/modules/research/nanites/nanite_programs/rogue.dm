@@ -9,6 +9,7 @@
 	unique = FALSE
 	rogue_types = list()
 	harmful = TRUE
+	ignore_safety = TRUE
 
 //Generic body-affecting programs will decay into this
 /datum/nanite_program/necrotic
@@ -18,6 +19,7 @@
 	unique = FALSE
 	rogue_types = list(/datum/nanite_program/glitch)
 	harmful = TRUE
+	ignore_safety = TRUE
 
 /datum/nanite_program/necrotic/active_effect()
 	host_mob.adjustBruteLoss(0.75, TRUE)
@@ -32,6 +34,7 @@
 	unique = FALSE
 	rogue_types = list(/datum/nanite_program/glitch)
 	harmful = TRUE
+	ignore_safety = TRUE
 
 /datum/nanite_program/toxic/active_effect()
 	host_mob.adjustToxLoss(0.5)
@@ -46,6 +49,7 @@
 	unique = FALSE
 	rogue_types = list(/datum/nanite_program/glitch)
 	harmful = TRUE
+	ignore_safety = TRUE
 
 /datum/nanite_program/suffocating/active_effect()
 	host_mob.adjustOxyLoss(3, 0)
@@ -60,6 +64,7 @@
 	unique = FALSE
 	rogue_types = list(/datum/nanite_program/necrotic)
 	harmful = TRUE
+	ignore_safety = TRUE
 
 /datum/nanite_program/brain_decay/active_effect()
 	if(prob(4))
@@ -74,6 +79,7 @@
 	unique = FALSE
 	rogue_types = list(/datum/nanite_program/brain_decay)
 	harmful = TRUE
+	ignore_safety = TRUE
 
 /datum/nanite_program/brain_misfire/active_effect()
 	if(prob(10))
@@ -95,6 +101,7 @@
 	unique = FALSE
 	rogue_types = list(/datum/nanite_program/necrotic)
 	harmful = TRUE
+	ignore_safety = TRUE
 
 /datum/nanite_program/skin_decay/active_effect()
 	host_mob.adjustBruteLoss(0.25)
@@ -114,6 +121,7 @@
 	unique = FALSE
 	rogue_types = list(/datum/nanite_program/necrotic)
 	harmful = TRUE
+	ignore_safety = TRUE
 
 /datum/nanite_program/nerve_decay/active_effect()
 	if(prob(5))

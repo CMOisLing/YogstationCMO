@@ -232,6 +232,8 @@
 	desc = "An electronic device designed to mimic the functions of an organic human heart."
 	icon_state = "heart-c"
 	organ_flags = ORGAN_SYNTHETIC
+	var/nanite_volume_boost = 25
+	var/list/nanite_bonus = list("cyber_heart")
 
 /obj/item/organ/heart/cybernetic/emp_act()
 	. = ..()
@@ -247,6 +249,8 @@
 	var/dose_available = TRUE
 	var/rid = /datum/reagent/medicine/epinephrine
 	var/ramount = 10
+	nanite_volume_boost = 50
+	nanite_bonus = list("cyber_heart", "upgraded_cyber_heart")
 
 /obj/item/organ/heart/cybernetic/upgraded/on_life()
 	. = ..()

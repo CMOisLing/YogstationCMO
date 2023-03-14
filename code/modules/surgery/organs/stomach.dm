@@ -98,6 +98,7 @@
 	status = ORGAN_ROBOTIC
 	organ_flags = ORGAN_SYNTHETIC
 	disgust_metabolism = 1.2	//Slightly more efficient at stabilizing itself
+	var/list/nanite_bonus = list("cyber_stomach")
 
 /obj/item/organ/stomach/cybernetic/upgraded
 	name = "upgraded cybernetic stomach"
@@ -106,6 +107,7 @@
 	maxHealth = 2 * STANDARD_ORGAN_THRESHOLD
 	var/nutriment_stashed = 0
 	disgust_metabolism = 2		//Twice as efficient as stabilizing itself
+	nanite_bonus = list("cyber_stomach", "upgraded_cyber_stomach")
 
 /obj/item/organ/stomach/cybernetic/upgraded/on_life()
 	if(owner.nutrition >= NUTRITION_LEVEL_FULL && nutriment_stashed < NUTRI_STASH_MAX)

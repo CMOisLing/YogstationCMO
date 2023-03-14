@@ -6,6 +6,7 @@
 	var/mob/living/host_mob
 
 	var/use_rate = 0 			//Amount of nanites used while active
+	var/ignore_safety = FALSE
 	var/unique = TRUE			//If there can be more than one copy in the same nanites
 	var/can_trigger = FALSE		//If the nanites have a trigger function (used for the programming UI)
 	var/trigger_cost = 0		//Amount of nanites required to trigger
@@ -153,7 +154,7 @@
 			timer_counter = activation_delay
 		else if(timer_type == NANITE_TIMER_RESET)
 			timer_counter = 0
-	if(check_conditions() && consume_nanites(use_rate))
+	if(check_conditions() && consume_nanites(use_rate, ignore_safety))
 	// here
 		if(!passive_enabled)
 			enable_passive_effect()

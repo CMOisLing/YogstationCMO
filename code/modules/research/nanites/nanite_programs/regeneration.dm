@@ -1,6 +1,6 @@
 /datum/nanite_program/metabolic_synthesis
 	name = "Metabolic Synthesis"
-	desc = "The nanites use the metabolic cycle of the host to speed up their replication rate, using their extra nutrition as fuel."
+	desc = "The nanites use the metabolic cycle of the host to speed up their replication rate, using their extra nutrition as fuel. Gains efficiency from cybernetic stomach."
 	use_rate = -0.5 //generates nanites
 	rogue_types = list(/datum/nanite_program/toxic)
 
@@ -13,7 +13,10 @@
 	return ..()
 
 /datum/nanite_program/metabolic_synthesis/active_effect()
-	host_mob.adjust_nutrition(-0.5)
+	if(nanites.bonuses.Find("cyber_stomach"))
+		host_mob.adjust_nutrition(-0.25)
+	else
+		host_mob.adjust_nutrition(-0.5)
 
 /datum/nanite_program/mitosis
 	name = "Mitosis"
@@ -118,3 +121,16 @@
 		var/turf/T = C.loc
 		light_amount = min(3, T.get_lumcount()) //Yolo
 		SEND_SIGNAL(host_mob, COMSIG_NANITE_ADJUST_VOLUME, light_amount)
+
+/datum/nanite_program/combustion_replication
+	name = "Internal Combustion Replication"
+	desc = "Nanites boost replication by burning hydrocarbons for energy, this heats up the user, losses efficiency at high temperatures cooling is recomended, also incompatable with endothermic replication."
+	use_rate = 0
+	rogue_types = list(/datum/nanite_program/toxic)
+
+/datum/nanite_program/combustion_replication/check_conditions() // finish later
+	. = ..()
+	if(!iscarbon())
+		return FALSE
+	var/mob/living/carbon/C = host_mob
+	if(host_mob.reagents.has_reagent(/datum/))
