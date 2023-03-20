@@ -6,6 +6,7 @@
 	var/mob/living/host_mob
 
 	var/use_rate = 0 			//Amount of nanites used while active
+	var/net_rate = 0			//god lord this is gonna be jank
 	var/ignore_safety = FALSE
 	var/unique = TRUE			//If there can be more than one copy in the same nanites
 	var/can_trigger = FALSE		//If the nanites have a trigger function (used for the programming UI)
@@ -169,7 +170,8 @@
 	return TRUE
 
 //Constantly procs as long as the program is active
-/datum/nanite_program/proc/active_effect()
+/datum/nanite_program/proc/active_effect()	// execute last I hope? add adjust nanites and use net var
+
 	return
 
 //Procs once when the program activates

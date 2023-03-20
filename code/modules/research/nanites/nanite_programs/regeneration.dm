@@ -88,7 +88,7 @@
 	if(host_mob.bodytemperature >= BODYTEMP_HEAT_DAMAGE_LIMIT)
 		var/regen = host_mob.bodytemperature / BODYTEMP_NORMAL
 		host_mob.adjust_bodytemperature(-20) //might need to increase this later
-		SEND_SIGNAL(host_mob, COMSIG_NANITE_ADJUST_VOLUME, regen)
+		nanites.adjust_nanites(null, regen)
 		if(prob(5))
 			to_chat(host_mob, span_notice("Your feel cold inside."))
 
@@ -120,7 +120,7 @@
 	if(isturf(C.loc))
 		var/turf/T = C.loc
 		light_amount = min(3, T.get_lumcount()) //Yolo
-		SEND_SIGNAL(host_mob, COMSIG_NANITE_ADJUST_VOLUME, light_amount)
+		nanites.adjust_nanites(null, light_amount)
 
 /datum/nanite_program/combustion_replication
 	name = "Internal Combustion Replication"
@@ -133,7 +133,8 @@
 	if(!iscarbon())
 		return FALSE
 	var/mob/living/carbon/C = host_mob
-	if(host_mob.reagents.has_reagent(/datum/))
+	if(host_mob.reagents.has_reagent(/datum/reagents/other_reagents/oil))
+		
 
 
 // -------------------------- mood based regen - emotional something something
