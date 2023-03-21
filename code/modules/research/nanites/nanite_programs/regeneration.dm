@@ -13,12 +13,12 @@
 	return ..()
 
 /datum/nanite_program/metabolic_synthesis/active_effect()
-	if(nanites.bonuses.Find("cyber_stomach"))
+	if(nanites.bonuses.Find("cyber_stomach")) //more efficient with a robot stomach
 		host_mob.adjust_nutrition(-0.25)
 	else
 		host_mob.adjust_nutrition(-0.5)
 
-/datum/nanite_program/mitosis
+/datum/nanite_program/mitosis //rework
 	name = "Mitosis"
 	desc = "The nanites gain the ability to self-replicate, using bluespace to power the process, instead of drawing from a template. This rapidly speeds up the replication rate,\
 			but it causes occasional software errors due to faulty copies. Not compatible with cloud sync."
@@ -37,7 +37,7 @@
 			return
 		fault.software_error()
 
-/datum/nanite_program/aggressive_replication
+/datum/nanite_program/aggressive_replication //rework
 	name = "Aggressive Replication"
 	desc = "Nanites will consume organic matter to improve their replication rate, damaging the host. The efficiency increases with the volume of nanites, requiring 200 to break even."
 	use_rate = 1
@@ -138,3 +138,28 @@
 
 
 // -------------------------- mood based regen - emotional something something
+
+/datum/nanite_program/mental_replication
+	name = "Sadness Replication"
+	desc = "Nanites consume Dopamine in order to boost regeneration, this is boosted further by having a really high mood, eventially leads to depression."
+	use_rate = 0
+	rogue_types = list(/datum/nanite_program/toxic)
+
+/datum/nanite_program/mental_replication/check_conditions()
+	. = ..()
+	if(ishuman(host_mob))
+		var/mob/living/carbon/human/H = host_mob
+		if(H.mood_enabled)
+			return TRUE
+	return FALSE
+
+/datum/nanite_program/mental_replication/enable_passive_effect()
+	. = ..()
+	var/mob/living/carbon/human/H = host_mob
+	SEND_SIGNAL(host_mob, COMSIG_ADD_MOOD_EVENT, "nanite_depression", /datum/mood_event/nanite_depression)
+
+/datum/nanite_program/mental_replication/disable_passive_effect()
+	. = ..()
+	var/mob/living/carbon/human/H = host_mob
+	SEND_SIGNAL(host_mob, COMSIG_CLEAR_MOOD_EVENT, "nanite_depression", /datum/mood_event/nanite_depression)
+

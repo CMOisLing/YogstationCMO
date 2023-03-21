@@ -6,7 +6,7 @@
 	var/mob/living/host_mob
 
 	var/use_rate = 0 			//Amount of nanites used while active
-	var/net_rate = 0			//god lord this is gonna be jank
+	var/gain_rate = 0			//use this to add nanites keep in mind use_rate stays constant
 	var/ignore_safety = FALSE
 	var/unique = TRUE			//If there can be more than one copy in the same nanites
 	var/can_trigger = FALSE		//If the nanites have a trigger function (used for the programming UI)
