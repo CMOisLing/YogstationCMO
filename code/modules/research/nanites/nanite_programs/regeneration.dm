@@ -141,7 +141,7 @@
 
 /datum/nanite_program/mental_replication
 	name = "Sadness Replication"
-	desc = "Nanites consume Dopamine in order to boost regeneration, this is boosted further by having a really high mood, eventially leads to depression."
+	desc = "Nanites consumes Dopamine in order to boost regeneration, this is boosted further by having a really high mood, eventially leads to depression."
 	use_rate = 0
 	rogue_types = list(/datum/nanite_program/toxic)
 
@@ -163,3 +163,13 @@
 	var/mob/living/carbon/human/H = host_mob
 	SEND_SIGNAL(host_mob, COMSIG_CLEAR_MOOD_EVENT, "nanite_depression", /datum/mood_event/nanite_depression)
 
+/datum/nanite_program/mental_replication/active_effect()
+	var/mob/living/carbon/human/H = host_mob
+	switch(host_mob.mood.mood_level)
+		if(1 to 3)
+			regen = 0.5
+		if(4 to 6)
+			regen = 1
+		if(7 to 9)
+			regen = 2
+			
