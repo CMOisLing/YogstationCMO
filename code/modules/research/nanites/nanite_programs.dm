@@ -171,7 +171,6 @@
 
 //Constantly procs as long as the program is active
 /datum/nanite_program/proc/active_effect()	// execute last I hope? add adjust nanites and use net var
-
 	return
 
 //Procs once when the program activates

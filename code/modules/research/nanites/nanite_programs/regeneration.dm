@@ -127,16 +127,26 @@
 	desc = "Nanites boost replication by burning hydrocarbons for energy, this heats up the user, losses efficiency at high temperatures cooling is recomended, also incompatable with endothermic replication."
 	use_rate = 0
 	rogue_types = list(/datum/nanite_program/toxic)
+	var/power = 0
 
 /datum/nanite_program/combustion_replication/check_conditions() // finish later - bonus from lungs
 	. = ..()
 	if(!iscarbon())
 		return FALSE
 	var/mob/living/carbon/C = host_mob
-	if(host_mob.reagents.has_reagent(/datum/reagents/other_reagents/oil))
-		
+	if(host_mob.reagents.has_reagent(/datum/reagents/nitroglycerin))
+		power = 3
+		return TRUE
+	else if(host_mob.reagents.has_reagent(/datum/reagents/oil))
+		power = 1
+		return TRUE
+	else if(host_mob.reagents.has_reagent(/datum/reagent/ethanol))
+		power = 0.5
+		return TRUE
+	else
+		return FALSE
 
-
+/datum/nanite_program/combustion_replication/active_effect()
 // -------------------------- mood based regen - emotional something something
 
 /datum/nanite_program/mental_replication
@@ -165,6 +175,7 @@
 
 /datum/nanite_program/mental_replication/active_effect()
 	var/mob/living/carbon/human/H = host_mob
+	var/regen = 0
 	switch(host_mob.mood.mood_level)
 		if(1 to 3)
 			regen = 0.5
