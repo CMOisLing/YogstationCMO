@@ -5,6 +5,8 @@
 	var/nanite_volume = 50		//amount of nanites in the system, used as fuel for nanite programs
 	var/max_nanites = 50		//maximum amount of nanites in the system
 	var/regen_rate = 2		//nanites generated per second
+	var/net_rate = 0
+	var/last_net_rate = 0 //remove is the nanite_scan() cant happen mid process
 	var/safety_threshold = 0	//how low nanites will get before they stop processing/triggering
 	var/cloud_id = 0 			//0 if not connected to the cloud, 1-100 to set a determined cloud backup to draw from
 	var/next_sync = 0
@@ -111,8 +113,9 @@
 	else
 		adjust_nanites(null, _amount) //just add to the nanite volume
 
-/datum/component/nanites/process(delta_time)
-	adjust_nanites(null, regen_rate * delta_time)
+/datum/component/nanites/process(delta_time) //maybe use delta time to augment regeneration from programs? probably not 
+	net_rate = 0
+	regenerate_nanites(null, regen_rate * delta_time)
 	add_research()
 	for(var/X in programs)
 		var/datum/nanite_program/NP = X
@@ -121,6 +124,7 @@
 	if(cloud_id && world.time > next_sync)
 		cloud_sync()
 		next_sync = world.time + NANITE_SYNC_DELAY
+	last_net_rate = net_rate
 
 //Syncs the nanite component to another, making it so programs are the same with the same programming (except activation status)
 /datum/component/nanites/proc/sync(datum/signal_source, datum/component/nanites/source, full_overwrite = TRUE, copy_activation = FALSE)
@@ -168,7 +172,13 @@
 	if(!force && safety_threshold && (nanite_volume - amount < safety_threshold))
 		return FALSE
 	adjust_nanites(null, -amount)
+	net_rate -= amount
 	return (nanite_volume > 0)
+
+/datum/component/nanites/proc/regenerate_nanites(amount)
+	adjust_nanites(null, amount) //This already checks for going above nanite cap
+	net_rate += amount
+	return (nanite_volume <= max_nanites)
 
 /datum/component/nanites/proc/adjust_nanites(datum/source, amount)
 	nanite_volume = clamp(nanite_volume + amount, 0, max_nanites)
