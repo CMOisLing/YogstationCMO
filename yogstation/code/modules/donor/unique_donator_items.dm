@@ -136,7 +136,7 @@ Uncomment this and use atomproccall as necessary, then copypaste the output into
 /datum/donator_gear/cark
 	name = "Pride Bedsheet"
 	ckey = "cark"
-	unlock_path = /obj/item/bedsheets/pridebedsheet/cark
+	unlock_path = /obj/item/bedsheet/pride
 
 	///Generic donator hats, ckey agnostic.
 /datum/donator_gear/dukeofsoleil
@@ -149,6 +149,11 @@ Uncomment this and use atomproccall as necessary, then copypaste the output into
 	name = "Gold Trimmed Fedora & Falcon"
 	ckey = "boxta"
 	unlock_path = /obj/item/storage/box/boxta
+
+/datum/donator_gear/ynot
+	name = "Golden Lighter"
+	ckey = "ynot01"
+	unlock_path = /obj/item/lighter/gold
 
 ///Generic donator hats, ckey agnostic.
 /datum/donator_gear/beanie
@@ -412,6 +417,11 @@ Uncomment this and use atomproccall as necessary, then copypaste the output into
 	unlock_path = /obj/item/clothing/head/wizard/fake/black
 	slot = SLOT_HEAD
 
+/datum/donator_gear/wizard/brown
+	name = "Wizard's Hat (Brown, Collectable)"
+	unlock_path = /obj/item/clothing/head/wizard/fake/brown
+	slot = SLOT_HEAD
+
 /datum/donator_gear/wizard/marisa
 	name = "Marisa Wizard Hat"
 	unlock_path = /obj/item/clothing/head/wizard/marisa/fake
@@ -588,7 +598,7 @@ Uncomment this and use atomproccall as necessary, then copypaste the output into
 	plush = TRUE
 
 /datum/donator_gear/narplush
-	name = "Nar'Sie"
+	name = "Nar'sie"
 	unlock_path = /obj/item/toy/plush/narplush/hugbox
 	plush = TRUE
 
